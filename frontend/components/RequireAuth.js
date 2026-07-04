@@ -4,14 +4,14 @@ import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/context/AuthContext";
 
-export default function HomePage() {
+export default function RequireAuth({ children }) {
   const { user, loading } = useAuth();
   const router = useRouter();
 
   useEffect(() => {
-    if (loading) return;
-    router.replace(user ? "/feed" : "/login");
-  }, [user, loading, router]);
+    if (!loading && !user) router.push("/login");
+  }, [loading, user, router]);
 
-  return null;
+  if (loading || !user) return null;
+  return children;
 }
