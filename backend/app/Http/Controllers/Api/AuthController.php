@@ -6,12 +6,15 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\LoginRequest;
 use App\Http\Requests\RegisterRequest;
 use App\Models\User;
+use App\Traits\CustomResponseTrait;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
+    use CustomResponseTrait;
+
     public function register(RegisterRequest $request)
     {
         $user = User::create([
@@ -21,38 +24,53 @@ class AuthController extends Controller
 
         $token = $user->createToken('auth')->plainTextToken;
 
-        return response()->json([
-            'user'  => $user,
-            'token' => $token,
-        ], 201);
+        return $this->jsonResponse(
+            flag: true,
+            message: 'User registered successfully',
+            data: ['user' => $user, 'token' => $token],
+            responseCode: 201
+        );
     }
 
     public function login(LoginRequest $request)
     {
         if (! Auth::attempt($request->validated())) {
-            return response()->json([
-                'message' => 'Invalid credentials.',
-            ], 422);
+            return $this->jsonResponse(
+                flag: false,
+                message: 'Invalid credentials.',
+                responseCode: 422
+            );
         }
 
         $user  = $request->user();
         $token = $user->createToken('auth')->plainTextToken;
 
-        return response()->json([
-            'user'  => $user,
-            'token' => $token,
-        ]);
+        return $this->jsonResponse(
+            flag: true,
+            message: 'Login successful.',
+            data: ['user' => $user, 'token' => $token],
+            responseCode: 200
+        );
     }
 
     public function me(Request $request)
     {
-        return response()->json($request->user());
+        return $this->jsonResponse(
+            flag: true,
+            message: 'User data retrieved.',
+            data: ['user' => $request->user()],
+            responseCode: 200
+        );
     }
 
     public function logout(Request $request)
     {
         $request->user()->currentAccessToken()->delete();
 
-        return response()->json(['message' => 'Logged out.']);
+        return $this->jsonResponse(
+            flag: true,
+            message: 'Logged out.',
+            responseCode: 200
+        );
     }
 }
