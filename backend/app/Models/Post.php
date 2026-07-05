@@ -2,12 +2,15 @@
 
 namespace App\Models;
 
+use App\Traits\HashesIds;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 
 #[Fillable(['user_id', 'content', 'visibility'])]
 class Post extends Model
 {
+    use HashesIds;
+
     public function user()
     {
         return $this->belongsTo(User::class);
