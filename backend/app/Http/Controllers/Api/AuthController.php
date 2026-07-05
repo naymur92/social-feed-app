@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\LoginRequest;
 use App\Http\Requests\RegisterRequest;
+use App\Http\Resources\UserResource;
 use App\Models\User;
 use App\Traits\CustomResponseTrait;
 use Illuminate\Http\Request;
@@ -27,7 +28,7 @@ class AuthController extends Controller
         return $this->jsonResponse(
             flag: true,
             message: 'User registered successfully',
-            data: ['user' => $user, 'token' => $token],
+            data: ['user' => UserResource::make($user)->resolve(), 'token' => $token],
             responseCode: 201
         );
     }
@@ -48,7 +49,7 @@ class AuthController extends Controller
         return $this->jsonResponse(
             flag: true,
             message: 'Login successful.',
-            data: ['user' => $user, 'token' => $token],
+            data: ['user' => UserResource::make($user)->resolve(), 'token' => $token],
             responseCode: 200
         );
     }
@@ -58,7 +59,7 @@ class AuthController extends Controller
         return $this->jsonResponse(
             flag: true,
             message: 'User data retrieved.',
-            data: ['user' => $request->user()],
+            data: ['user' => UserResource::make($request->user())->resolve()],
             responseCode: 200
         );
     }
