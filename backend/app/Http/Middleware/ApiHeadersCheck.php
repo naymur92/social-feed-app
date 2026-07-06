@@ -29,10 +29,12 @@ class ApiHeadersCheck
 
             // Content-Type is required ONLY for body requests
             if (in_array($request->method(), ['POST', 'PUT', 'PATCH'])) {
-
                 if (
                     !$contentType ||
-                    !str_contains($contentType, 'application/json')
+                    (
+                        !str_contains($contentType, 'application/json') &&
+                        !str_contains($contentType, 'multipart/form-data')
+                    )
                 ) {
                     throw new \Exception("Invalid Content Type", 415);
                 }
