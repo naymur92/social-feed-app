@@ -15,7 +15,7 @@ class DemoSeeder extends Seeder
     {
         // users
         $naymur = User::create([
-            'first_name' => 'Naymur Rahman',
+            'first_name' => 'Naymur',
             'last_name'  => 'Rahman',
             'email'      => 'naymur@example.com',
             'password'   => Hash::make('password'),
