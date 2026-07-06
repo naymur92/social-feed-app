@@ -31,6 +31,10 @@ class PostController extends Controller
             flag: true,
             message: 'Posts retrieved successfully',
             data: PostResource::collection($posts)->resolve(),
+            extra: [
+                'next_cursor' => $posts->nextCursor()?->encode(),
+                'has_more'    => $posts->hasMorePages(),
+            ],
             responseCode: 200
         );
     }
