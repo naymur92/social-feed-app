@@ -11,10 +11,10 @@ export async function api(path, { method = "GET", body, token, isFormData = fals
     body: isFormData ? body : body ? JSON.stringify(body) : undefined,
   });
 
-  const data = await res.json().catch(() => null);
+  const json = await res.json().catch(() => null);
 
-  if (!res.ok) {
-    throw { status: res.status, data }; // data.errors holds Laravel validation messages
+  if (!res.ok || json?.flag === false) {
+    throw { status: res.status, message: json?.msg, errors: json?.errors, data: json?.data };
   }
-  return data;
+  return json;
 }
