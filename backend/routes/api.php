@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\CommentController;
 use App\Http\Controllers\Api\LikeController;
 use App\Http\Controllers\Api\PostController;
 use Illuminate\Support\Facades\Route;
@@ -16,6 +17,8 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/posts',                   [PostController::class, 'store']);
     Route::post('/posts/{post}/like',       [LikeController::class, 'togglePost']);
     Route::get('/posts/{post}/likes',       [LikeController::class, 'postLikers']);
+    Route::get('/posts/{post}/comments',      [CommentController::class, 'index']);
+    Route::post('/posts/{post}/comments',     [CommentController::class, 'store']);
 
     Route::post('/comments/{comment}/like', [LikeController::class, 'toggleComment']);
     Route::get('/comments/{comment}/likes', [LikeController::class, 'commentLikers']);
