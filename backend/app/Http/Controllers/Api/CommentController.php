@@ -29,7 +29,7 @@ class CommentController extends Controller
                     ->withExists(['likes as liked_by_me' => fn($qq) => $qq->where('user_id', $userId)])
             ])
             ->orderByDesc('id')
-            ->cursorPaginate(5);
+            ->cursorPaginate(3);
 
         return $this->jsonResponse(
             flag: true,
