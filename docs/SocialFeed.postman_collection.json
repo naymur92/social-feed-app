@@ -216,7 +216,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"content\": \"Test Post   34\",\n    \"visibility\": \"public\",\n    \"images\": null\n}",
+							"raw": "{\n    \"content\": \"Test Post   25\",\n    \"visibility\": \"public\",\n    \"images\": null\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -224,15 +224,13 @@
 							}
 						},
 						"url": {
-							"raw": "{{BaseUrl}}/api/posts/89uVPZc/likes",
+							"raw": "{{BaseUrl}}/api/posts",
 							"host": [
 								"{{BaseUrl}}"
 							],
 							"path": [
 								"api",
-								"posts",
-								"89uVPZc",
-								"likes"
+								"posts"
 							]
 						}
 					},
@@ -325,6 +323,87 @@
 			"name": "Comments",
 			"item": [
 				{
+					"name": "Get Post Comments",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{BaseUrl}}/api/posts/6e1PXOGk/comments",
+							"host": [
+								"{{BaseUrl}}"
+							],
+							"path": [
+								"api",
+								"posts",
+								"6e1PXOGk",
+								"comments"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Store Post Comments",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"body\": \"Test reply\",\n    \"parent_id\": \"6e1PXOGk\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BaseUrl}}/api/posts/6e1PXOGk/comments",
+							"host": [
+								"{{BaseUrl}}"
+							],
+							"path": [
+								"api",
+								"posts",
+								"6e1PXOGk",
+								"comments"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "Get Comment Likes",
 					"request": {
 						"auth": {
@@ -346,14 +425,14 @@
 							}
 						],
 						"url": {
-							"raw": "{{BaseUrl}}/api/comments/89uVPZc/likes",
+							"raw": "{{BaseUrl}}/api/comments/6e1PXOGk/likes",
 							"host": [
 								"{{BaseUrl}}"
 							],
 							"path": [
 								"api",
 								"comments",
-								"89uVPZc",
+								"6e1PXOGk",
 								"likes"
 							]
 						}
@@ -391,14 +470,14 @@
 							}
 						},
 						"url": {
-							"raw": "{{BaseUrl}}/api/comments/89uVPZc/like",
+							"raw": "{{BaseUrl}}/api/comments/6e1PXOGk/like",
 							"host": [
 								"{{BaseUrl}}"
 							],
 							"path": [
 								"api",
 								"comments",
-								"89uVPZc",
+								"6e1PXOGk",
 								"like"
 							]
 						}
