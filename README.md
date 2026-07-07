@@ -1,6 +1,6 @@
 # Social Feed (Full Stack Application)
 
-Live: <https://social-feed.naymur.dev> · API: <https://cdn.social-feed.naymur.dev> · Video: <https://youtube.com>
+Live: <https://social-feed.naymur.dev> · API: <https://cdn.social-feed.naymur.dev/api> · Video: <https://youtube.com>
 
 ## Demo accounts
 
